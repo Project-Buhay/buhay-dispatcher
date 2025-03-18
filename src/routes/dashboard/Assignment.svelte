@@ -19,9 +19,9 @@
 </script>
 
 <div
-class="my-10 flex w-5/6 content-center rounded-xl bg-black p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+    class="my-10 flex w-5/6 content-center rounded-xl bg-black p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
 >
-    <div class='mr-10 w-1/6 text-2xl'>Request ID</div>
+    <div class="mr-10 w-1/6 text-2xl">Request ID</div>
 </div>
 
 {#each dispatch_data as dispatch, i}

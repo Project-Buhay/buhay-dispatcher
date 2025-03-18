@@ -12,17 +12,16 @@
         {
             request_id: 'second',
             coordinate_names: ['UP', 'Ateneo', 'DLSU', 'UST'],
-        }
+        },
     ]}
-
     rescuers={[
         {
             person_id: '12',
-            username: 'KevinSogo'
+            username: 'KevinSogo',
         },
         {
             person_id: '13',
-            username: 'JeromeBeltran'
-        }
+            username: 'JeromeBeltran',
+        },
     ]}
-></Assignment>  
+></Assignment>
