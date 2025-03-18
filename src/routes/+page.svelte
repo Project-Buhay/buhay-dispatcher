@@ -6,14 +6,23 @@
     const socket = browser ? new WebSocket(`ws://buhay-backend-production.up.railway.app/ws/123`) : null
     
     let connected = $state(false)
-    let message = $state('')
+    let buffer = $state([])
     socket?.addEventListener('open', () => (connected = true))
     socket?.addEventListener('close', () => (connected = false))
-    socket?.addEventListener('message', () => (message = false))
+    socket?.addEventListener('message', (message) => (buffer.push(message.data)))
+
+    
+    
   </script>
   
   <p>
     Websocket connection status: {connected ? '🟢' : '🔴'}
-    Websocket message: {message ? {message} : '???'}
+    Websocket entries: 
+  
   </p>
+  <ul>
+    {#each buffer as entry}
+    <li>{entry}</li>
+    {/each}
+  </ul>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
