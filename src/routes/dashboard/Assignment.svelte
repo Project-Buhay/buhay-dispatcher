@@ -63,12 +63,12 @@
         <div class="flex basis-1/6 content-center justify-center">
             {#if is_assigned[dispatch.request_id]}
                 <button
-                    class="h-16 w-30 rounded-3xl bg-white p-4 font-bold text-black italic"
+                    class="w-30 h-16 rounded-3xl bg-white p-4 font-bold italic text-black"
                     disabled>Assigned</button
                 >
             {:else}
                 <button
-                    class="h-16 w-30 rounded-3xl p-4 font-bold
+                    class="w-30 h-16 rounded-3xl p-4 font-bold
             hover:bg-white hover:text-black hover:duration-150"
                     onclick={() => {
                         is_assigned[dispatch.request_id] = !is_assigned[dispatch.request_id];
