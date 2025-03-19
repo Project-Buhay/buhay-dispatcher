@@ -1,4 +1,3 @@
-/** @type {import('./$types').PageServerLoad} */
 import { browser } from '$app/environment';
 import {
     DispatcherDatum as DispatcherDatumSchema,
