@@ -9,7 +9,7 @@ export default defineConfig({
     plugins: [sveltekit(), websocket()],
     css: {
         postcss: {
-            plugins: [tailwind, autoprefixer]
-        }
-    }
+            plugins: [tailwind, autoprefixer],
+        },
+    },
 });
