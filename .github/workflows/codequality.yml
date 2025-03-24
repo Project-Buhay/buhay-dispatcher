@@ -1,0 +1,27 @@
+name: Check Code Quality
+
+on:
+  pull_request:
+  pull_request_target:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Synchronize SvelteKit
+        run: pnpm sync
+      - name: Run Linters
+        run: pnpm lint
