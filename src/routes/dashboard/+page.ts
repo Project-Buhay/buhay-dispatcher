@@ -1,6 +1,7 @@
 import { parse } from 'valibot';
 
 import { browser } from '$app/environment';
+import { PUBLIC_WEBSOCKET_ID, PUBLIC_WEBSOCKET_URL } from '$env/static/public';
 
 import {
     DispatcherDatum as DispatcherDatumSchema,
@@ -12,7 +13,7 @@ import { Route as RouteSchema } from '$lib/models/routes';
 
 export function load() {
     const socket = browser
-        ? new WebSocket('ws://buhay-backend-production.up.railway.app/ws/0')
+        ? new WebSocket(`${PUBLIC_WEBSOCKET_URL}/${PUBLIC_WEBSOCKET_ID}`)
         : null;
 
     const dispatcher_data: DispatcherData = [];
