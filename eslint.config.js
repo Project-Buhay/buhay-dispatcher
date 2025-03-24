@@ -28,6 +28,7 @@ export default ts.config(
         },
         rules: {
             'svelte/no-at-html-tags': 'warn',
+            'svelte/require-each-key': 'off',
         },
     },
     {

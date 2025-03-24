@@ -1,7 +1,7 @@
-import { array, object, pipe, string, transform, type InferOutput } from 'valibot';
+import { type InferOutput, array, object, string } from 'valibot';
 
 export const Route = object({
-    data: pipe(string(), transform(Array<string>)),
+    location_names: array(string()),
 });
 
 export const Routes = array(Route);
