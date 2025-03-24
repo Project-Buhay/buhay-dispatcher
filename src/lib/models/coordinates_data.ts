@@ -1,17 +1,7 @@
-import { array, object, type InferOutput, pipe, transform, string } from 'valibot';
+import { type InferOutput, array, literal, number, object, record } from 'valibot';
 
 export const CoordinatesDatum = object({
-    data: pipe(
-        string(),
-        transform(input => {
-            const arr = input.split(',');
-            const nums: number[] = [];
-            arr.forEach(st => {
-                nums.push(Number(st));
-            });
-            return nums;
-        }),
-    ),
+    raw_coordinates: array(record(literal('coordinates'), array(number()))),
 });
 
 export const CoordinatesData = array(CoordinatesDatum);
