@@ -21,8 +21,6 @@ jobs:
           node-version: latest
       - name: Install Dependencies
         run: pnpm install
-      - name: Synchronize SvelteKit
-        run: pnpm sync
       - name: Run Linters
         run: pnpm lint
         env:
