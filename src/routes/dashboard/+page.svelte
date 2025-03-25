@@ -8,13 +8,13 @@
 <Assignment
     rescuers={[
         {
-            person_id: '12',
+            person_id: 12,
             username: 'KevinSogo',
         },
         {
-            person_id: '13',
+            person_id: 13,
             username: 'JeromeBeltran',
         },
     ]}
-    data={dispatcher_data}
+    {dispatcher_data}
 ></Assignment>
