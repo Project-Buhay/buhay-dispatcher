@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ChevronDownCircle, ChevronUpCircle } from 'lucide-svelte';
+    import { ChevronDownCircle, ChevronUpCircle } from 'lucide-svelte'
 
     import type { DispatcherData } from "$lib/models/dispatcher_data";
     import type { Rescuers } from "$lib/models/rescuers";
@@ -10,10 +10,20 @@
     }
 
     let { rescuers, dispatcher_data }: Props = $props();
-    let is_assigned = $state(Array(data.length).fill(false)); // If route is assigned or not
-    let are_locs_displayed = $state(Array(data.length).fill(false));
 
-    function DisplayLocs(request_id: number) {
+    let are_locs_displayed: Record<string, boolean> = $derived.by(() => {
+        const _are_locs_displayed: Record<string, boolean> = {};
+        dispatcher_data.forEach(({ request_id }) => _are_locs_displayed[request_id] = false);
+        return _are_locs_displayed;
+    });
+
+    let is_assigned: Record<string, boolean> = $derived.by(() => {
+        const _is_assigned: Record<string, boolean> = {};
+        dispatcher_data.forEach(({ request_id }) => _is_assigned[request_id] = false);
+        return _is_assigned;
+    });
+
+    function displayLocs(request_id: number) {
         are_locs_displayed[request_id] = !are_locs_displayed[request_id];
     }
 </script>
@@ -40,18 +50,18 @@
             <button
                 class="text-xl font-bold flex items-center"
                 onclick={() => {
-                    DisplayLocs(i);
+                    displayLocs(request_id);
                 }}
             >
                 Locations
-                {#if are_locs_displayed[i]}
+                {#if are_locs_displayed[request_id]}
                     <ChevronUpCircle class="ml-2" />
                 {:else}
                     <ChevronDownCircle class="ml-2" />
                 {/if}
             </button>
             {#each parsed_coordinate_names.location_names as loc}
-                <div class="{are_locs_displayed[i] ? 'block' : 'hidden'} mt-2">{loc}</div>
+                <div class="{are_locs_displayed[request_id] ? 'block' : 'hidden'} mt-2">{loc}</div>
             {/each}
         </div>
 
@@ -59,9 +69,7 @@
         <div class="mr-10 w-1/6 content-center">
             <select
                 name="ass_rescuer"
-                onchange={() => {
-                    is_assigned[i] = false;
-                }}
+                onchange={() => is_assigned[request_id] = false}
                 class="ml-[42px] w-full rounded-xl bg-white text-black"
             >
                 {#each rescuers as { person_id, username }}
@@ -74,7 +82,7 @@
 
         <!-- Assign Button -->
         <div class="ml-30 flex-initial basis-1/6 content-center justify-center">
-            {#if is_assigned[i]}
+            {#if is_assigned[request_id]}
                 <button
                     class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                     disabled>Assigned</button
@@ -83,9 +91,8 @@
                 <button
                     class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
             font-semibold hover:bg-white hover:text-black hover:duration-150"
-                    onclick={() => {
-                        is_assigned[i] = !is_assigned[i];
-                    }}>Assign</button
+                    onclick={() => is_assigned[request_id] = !is_assigned[request_id]}
+                    >Assign</button
                 >
             {/if}
         </div>
