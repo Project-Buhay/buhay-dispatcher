@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { ChevronDownCircle, ChevronUpCircle } from 'lucide-svelte';
+
     import type { DispatcherData } from "$lib/models/dispatcher_data";
     import type { Rescuers } from "$lib/models/rescuers";
 
@@ -38,13 +40,18 @@
         <!-- Collapsible Location Names -->
         <div class="mr-10 w-1/3 flex-initial content-center">
             <button
-                class="text-xl font-bold"
+                class="text-xl font-bold flex items-center"
                 onclick={() => {
                     DisplayLocs(i);
                 }}
             >
-                Locations ▼</button
-            >
+                Locations
+                {#if are_locs_displayed[i]}
+                    <ChevronUpCircle class="ml-2" />
+                {:else}
+                    <ChevronDownCircle class="ml-2" />
+                {/if}
+            </button>
             {#each parsed_coordinate_names.location_names as loc}
                 <div class="{are_locs_displayed[i]} mt-2">{loc}</div>
             {/each}
