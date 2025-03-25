@@ -1,5 +1,8 @@
-<script>
+<script lang='ts'>
     import Assignment from './Assignment.svelte';
+
+    let { data } = $props();
+    let { dispatcher_data } = $derived(data);
 </script>
 
 <Assignment
@@ -24,4 +27,5 @@
             username: 'JeromeBeltran',
         },
     ]}
+    data = {dispatcher_data}
 ></Assignment>
