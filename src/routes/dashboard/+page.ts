@@ -11,7 +11,7 @@ import {
 import { CoordinatesDatum as CoordinatesDatumSchema } from '$lib/models/coordinates_data';
 import { Route as RouteSchema } from '$lib/models/routes';
 
-export function load() {
+export function load({ data }) {
     const socket = browser
         ? new WebSocket(`ws://${PUBLIC_WEBSOCKET_URL}/ws/${PUBLIC_WEBSOCKET_ID}`)
         : null;
@@ -36,5 +36,5 @@ export function load() {
             dispatcher_data.push(to_push);
         });
     }
-    return { dispatcher_data };
+    return { ...data, dispatcher_data };
 }
