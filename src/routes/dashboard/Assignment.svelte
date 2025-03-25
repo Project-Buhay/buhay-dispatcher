@@ -71,7 +71,9 @@
                 name="ass_rescuer"
                 onchange={() => is_assigned[request_id] = false}
                 class="ml-[42px] w-full rounded-xl bg-white text-black"
+                disabled={route_info_id === null || route_info_id === undefined}
             >
+                <option class="bg-black text-white" value="" selected>Choose</option>
                 {#each rescuers as { person_id, username }}
                     <option class="bg-black text-white" value={person_id}
                         >{username}</option
@@ -90,8 +92,9 @@
             {:else}
                 <button
                     class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
-            font-semibold hover:bg-white hover:text-black hover:duration-150"
+            font-semibold {route_info_id === null || route_info_id === undefined ? '' : 'hover:bg-white hover:text-black hover:duration-150'}"
                     onclick={() => is_assigned[request_id] = !is_assigned[request_id]}
+                    disabled={route_info_id === null || route_info_id === undefined}
                     >Assign</button
                 >
             {/if}
