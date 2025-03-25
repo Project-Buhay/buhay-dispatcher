@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Assignment from './Assignment.svelte';
+    import AssignmentPanel from '$lib/components/panels/AssignmentPanel.svelte';
 
     let { data } = $props();
     let { dispatcher_data } = $derived(data);
 </script>
 
-<Assignment
+<AssignmentPanel
     rescuers={[
         {
             person_id: 12,
@@ -17,4 +17,4 @@
         },
     ]}
     {dispatcher_data}
-></Assignment>
+></AssignmentPanel>
