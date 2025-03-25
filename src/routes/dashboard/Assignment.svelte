@@ -1,17 +1,9 @@
 <script lang="ts">
-    let { dispatch_data, rescuers, data } = $props();
-    let is_assigned = $state({}); // If route is assigned or not
-    let are_locs_displayed = $state({});
+    let { rescuers, data } = $props();
+    let is_assigned = $state(Array(data.length).fill(false)); // If route is assigned or not
+    let are_locs_displayed = $state(Array(data.length).fill('hidden mt-2'));
 
-    // Initializes is_assigned list
-    for (let a = 0; a < dispatch_data.length; a++) {
-        Object.defineProperty(is_assigned, dispatch_data[a].request_id, { value: false });
-        Object.defineProperty(are_locs_displayed, dispatch_data[a].request_id, {
-            value: 'hidden mt-2',
-        });
-    }
-
-    function DisplayLocs(request_id: string) {
+    function DisplayLocs(request_id: number) {
         if (are_locs_displayed[request_id] == 'hidden mt-2')
             are_locs_displayed[request_id] = 'block mt-2';
         else are_locs_displayed[request_id] = 'hidden mt-2';
@@ -21,9 +13,9 @@
 <div
     class="my-10 flex w-5/6 content-center rounded-xl bg-buhay-red p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
 >
-    <div class="mr-10 w-1/6 text-2xl text-center font-semibold">Request ID</div>
-    <div class="mr-10 w-1/3 text-2xl text-center font-semibold">Route Location Names</div>
-    <div class="mr-10 w-[36.5%]  text-2xl text-center font-semibold">Assign Rescuer</div>
+    <div class="mr-10 w-1/6 text-center text-2xl font-semibold">Request ID</div>
+    <div class="mr-10 w-1/3 text-center text-2xl font-semibold">Route Location Names</div>
+    <div class="mr-10 w-[36.5%] text-center text-2xl font-semibold">Assign Rescuer</div>
 </div>
 
 {#each data as dispatch, i}
@@ -40,19 +32,25 @@
             <button
                 class="text-xl font-bold"
                 onclick={() => {
-                    DisplayLocs(dispatch.request_id);
+                    DisplayLocs(i);
                 }}
             >
-                Route {i+1} Locations ▼</button
+                Route {i + 1} Locations ▼</button
             >
             {#each dispatch.parsed_coordinate_names.location_names as loc}
-                <div class='{are_locs_displayed[dispatch.request_id]} mt-2'>{loc}</div>
+                <div class="{are_locs_displayed[i]} mt-2">{loc}</div>
             {/each}
         </div>
 
         <!-- Rescuer Assignment -->
         <div class="mr-10 w-1/6 content-center">
-            <select name="ass_rescuer" onchange={(is_assigned[dispatch.request_id] = false)} class='w-full bg-white text-black rounded-xl ml-[42px]'>
+            <select
+                name="ass_rescuer"
+                onchange={() => {
+                    is_assigned[i] = false;
+                }}
+                class="ml-[42px] w-full rounded-xl bg-white text-black"
+            >
                 {#each rescuers as rescuer}
                     <option class="bg-black text-white" value={rescuer.person_id}
                         >{rescuer.username}</option
@@ -62,18 +60,18 @@
         </div>
 
         <!-- Assign Button -->
-        <div class="flex-initial basis-1/6 content-center justify-center ml-30">
-            {#if is_assigned[dispatch.request_id]}
+        <div class="ml-30 flex-initial basis-1/6 content-center justify-center">
+            {#if is_assigned[i]}
                 <button
-                    class="w-[125px] h-16 rounded-2xl bg-[#144359] p-4 font-bold text-white flex-initial ml-[42px]"
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                     disabled>Assigned</button
                 >
             {:else}
                 <button
-                    class="w-[125px] h-16 rounded-2xl p-4 font-semibold ml-[42px]
-            hover:bg-white hover:text-black hover:duration-150 flex-initial"
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
+            font-semibold hover:bg-white hover:text-black hover:duration-150"
                     onclick={() => {
-                        is_assigned[dispatch.request_id] = !is_assigned[dispatch.request_id];
+                        is_assigned[i] = !is_assigned[i];
                     }}>Assign</button
                 >
             {/if}
