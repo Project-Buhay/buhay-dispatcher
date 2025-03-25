@@ -8,5 +8,5 @@ export async function load({ fetch }) {
     const raw_json = await response.json();
     const rescuers = parse(RescuersSchema, raw_json.rescuers);
 
-    return { rescuers }
+    return { rescuers };
 }

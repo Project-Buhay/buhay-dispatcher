@@ -1,13 +1,12 @@
 <script lang="ts">
-    import type { DispatcherData } from "$lib/models/dispatcher_data";
-    import type { Rescuers } from "$lib/models/rescuers";
+    import type { DispatcherData } from '$lib/models/dispatcher_data';
+    import type { Rescuers } from '$lib/models/rescuers';
 
-    import AssignmentItem from "$lib/components/items/AssignmentItem.svelte";
-    import { LogIn } from "lucide-svelte";
+    import AssignmentItem from '$lib/components/items/AssignmentItem.svelte';
 
     interface Props {
-        dispatcher_data: DispatcherData,
-        rescuers: Rescuers
+        dispatcher_data: DispatcherData;
+        rescuers: Rescuers;
     }
 
     let { dispatcher_data, rescuers }: Props = $props();

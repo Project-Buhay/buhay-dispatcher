@@ -4,10 +4,9 @@
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
 
-
     interface Props {
-        dispatcher_datum: DispatcherDatum,
-        rescuers: Rescuers
+        dispatcher_datum: DispatcherDatum;
+        rescuers: Rescuers;
     }
 
     let { dispatcher_datum, rescuers }: Props = $props();
@@ -32,10 +31,7 @@
 
     <!-- Collapsible Location Names -->
     <div class="mr-10 w-1/3 flex-initial content-center">
-        <button
-            class="text-xl font-bold flex items-center"
-            onclick={displayLocs}
-        >
+        <button class="flex items-center text-xl font-bold" onclick={displayLocs}>
             Locations
             {#if are_locs_displayed}
                 <ChevronUpCircle class="ml-2" />
@@ -52,15 +48,13 @@
     <div class="mr-10 w-1/6 content-center">
         <select
             name="ass_rescuer"
-            onchange={() => is_assigned = false}
+            onchange={() => (is_assigned = false)}
             class="ml-[42px] w-full rounded-xl bg-white text-black"
             disabled={route_info_id === null || route_info_id === undefined}
         >
             <option class="bg-black text-white" value="" selected>Choose</option>
             {#each rescuers as { person_id, username }}
-                <option class="bg-black text-white" value={person_id}
-                    >{username}</option
-                >
+                <option class="bg-black text-white" value={person_id}>{username}</option>
             {/each}
         </select>
     </div>
@@ -75,10 +69,11 @@
         {:else}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
-        font-semibold {route_info_id === null || route_info_id === undefined ? '' : 'hover:bg-white hover:text-black hover:duration-150'}"
-                onclick={() => is_assigned = !is_assigned}
-                disabled={route_info_id === null || route_info_id === undefined}
-                >Assign</button
+        font-semibold {route_info_id === null || route_info_id === undefined
+                    ? ''
+                    : 'hover:bg-white hover:text-black hover:duration-150'}"
+                onclick={() => (is_assigned = !is_assigned)}
+                disabled={route_info_id === null || route_info_id === undefined}>Assign</button
             >
         {/if}
     </div>
