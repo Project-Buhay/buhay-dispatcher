@@ -11,12 +11,10 @@
 
     let { rescuers, dispatcher_data }: Props = $props();
     let is_assigned = $state(Array(data.length).fill(false)); // If route is assigned or not
-    let are_locs_displayed = $state(Array(data.length).fill('hidden mt-2'));
+    let are_locs_displayed = $state(Array(data.length).fill(false));
 
     function DisplayLocs(request_id: number) {
-        if (are_locs_displayed[request_id] == 'hidden mt-2')
-            are_locs_displayed[request_id] = 'block mt-2';
-        else are_locs_displayed[request_id] = 'hidden mt-2';
+        are_locs_displayed[request_id] = !are_locs_displayed[request_id];
     }
 </script>
 
@@ -53,7 +51,7 @@
                 {/if}
             </button>
             {#each parsed_coordinate_names.location_names as loc}
-                <div class="{are_locs_displayed[i]} mt-2">{loc}</div>
+                <div class="{are_locs_displayed[i] ? 'block' : 'hidden'} mt-2">{loc}</div>
             {/each}
         </div>
 
