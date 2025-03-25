@@ -1,5 +1,13 @@
 <script lang="ts">
-    let { rescuers, data } = $props();
+    import type { DispatcherData } from "$lib/models/dispatcher_data";
+    import type { Rescuers } from "$lib/models/rescuers";
+
+    interface Props {
+        rescuers: Rescuers,
+        dispatcher_data: DispatcherData
+    }
+
+    let { rescuers, dispatcher_data }: Props = $props();
     let is_assigned = $state(Array(data.length).fill(false)); // If route is assigned or not
     let are_locs_displayed = $state(Array(data.length).fill('hidden mt-2'));
 
@@ -18,13 +26,13 @@
     <div class="mr-10 w-[36.5%] text-center text-2xl font-semibold">Assign Rescuer</div>
 </div>
 
-{#each data as dispatch, i}
+{#each dispatcher_data as { request_id, route_info_id, parsed_coordinate_names }}
     <div
         class="my-10 flex w-5/6 content-center rounded-xl bg-blue-neutral p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
     >
         <!-- Request ID -->
         <div class="mr-10 w-1/6 flex-initial content-center text-2xl font-bold">
-            <p class="h-8 text-center align-middle">{dispatch.request_id}</p>
+            <p class="h-8 text-center align-middle">{request_id}</p>
         </div>
 
         <!-- Collapsible Location Names -->
@@ -35,9 +43,9 @@
                     DisplayLocs(i);
                 }}
             >
-                Route {i + 1} Locations ▼</button
+                Locations ▼</button
             >
-            {#each dispatch.parsed_coordinate_names.location_names as loc}
+            {#each parsed_coordinate_names.location_names as loc}
                 <div class="{are_locs_displayed[i]} mt-2">{loc}</div>
             {/each}
         </div>
@@ -51,9 +59,9 @@
                 }}
                 class="ml-[42px] w-full rounded-xl bg-white text-black"
             >
-                {#each rescuers as rescuer}
-                    <option class="bg-black text-white" value={rescuer.person_id}
-                        >{rescuer.username}</option
+                {#each rescuers as { person_id, username }}
+                    <option class="bg-black text-white" value={person_id}
+                        >{username}</option
                     >
                 {/each}
             </select>
