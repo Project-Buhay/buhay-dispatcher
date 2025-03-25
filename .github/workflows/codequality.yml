@@ -1,6 +1,7 @@
 name: Check Code Quality
 
 on:
+  push:
   pull_request:
   pull_request_target:
 
@@ -25,3 +26,6 @@ jobs:
         run: pnpm sync
       - name: Run Linters
         run: pnpm lint
+        env:
+          PUBLIC_WEBSOCKET_URL: ${{ vars.PUBLIC_WEBSOCKET_URL }} 
+          PUBLIC_WEBSOCKET_ID: ${{ vars.PUBLIC_WEBSOCKET_ID }}
