@@ -11,7 +11,7 @@ export function load({ cookies }) {
 };
 
 export const actions = {
-    login: async ({ cookies, request, fetch }) => {
+    default: async ({ cookies, request, fetch }) => {
         const data = await request.formData();
         const user = data.get('user');
         const password = data.get('password');

@@ -50,7 +50,7 @@
 
             <div class="flex w-full justify-center">
                 <button
-                    formaction="?/login"
+                    formaction=""
                     class="rounded-2xl px-6 py-3 text-white
                            active:bg-[#144359] active:font-semibold active:text-white active:drop-shadow-xl active:duration-300
                            {!sign_in
