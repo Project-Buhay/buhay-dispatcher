@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { parse } from 'valibot';
 
@@ -17,7 +17,7 @@ export const actions = {
         const password = data.get('password');
 
         if (!user && !password) {
-            return { success: false };
+            return fail(400);
         }
 
         await fetch(`http://${PUBLIC_API_URL}/login`, {
@@ -45,6 +45,6 @@ export const actions = {
                 }
             });
 
-        return { success: false };
+        return fail(400, { user, message: 'Invalid credentials. Please try again.' });
     },
 } satisfies Actions;
