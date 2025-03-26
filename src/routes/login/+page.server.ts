@@ -13,9 +13,9 @@ export const actions = {
         const data = await request.formData();
         const user = data.get('user');
         const password = data.get('password');
-        
+
         if (!user && !password) {
-        	return { success: false };
+            return { success: false };
         }
 
         await fetch(`http://${PUBLIC_API_URL}/login`, {
@@ -30,12 +30,14 @@ export const actions = {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.person_id == '2' || json.person_id == '1') {
-                    redirect(303, '/redirect-login');
-                }
-                if (json.person_id == '3') {
-                    cookies.set('sessionid', json.person_id, { path: '/' });
-                    redirect(303, '/');
+                const { access_control } = json;
+                switch(access_control) {
+                    case 1:
+                    case 2:
+                        redirect(303, '/redirect-login');
+                    case 3:
+                        cookies.set('sessionid', access_control.toString(), { path: '/' });
+                        redirect(303, '/');
                 }
             });
 
