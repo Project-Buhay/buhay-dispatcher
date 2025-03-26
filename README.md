@@ -59,8 +59,8 @@ pnpm sync
 Running the repository also requires an `.env` file at the root of the project with the following parameters
 
 ```bash
-PUBLIC_WEBSOCKET_URL
-PUBLIC_WEBSOCKET_ID
+PUBLIC_API_URL
+PUBLIC_USER_ID
 ```
 
 \

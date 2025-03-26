@@ -1,23 +1,26 @@
-import type { PageServerLoad, Actions } from './$types';
-import { PUBLIC_WEBSOCKET_URL } from '$env/static/public';
 import { redirect } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { parse } from 'valibot';
 
-export const load: PageServerLoad = async ({ cookies }) => {
-    const access_level = cookies.get('sessionid');
-    return { access_level };
-};
+import { PUBLIC_API_URL } from '$env/static/public';
+import { LoginOutput as LoginOutputSchema } from '$lib/models/login_output';
+
+export function load({ cookies }) {
+    const access_control = cookies.get('sessionid');
+    return { access_control };
+}
+
 export const actions = {
-    login: async ({ cookies, request, fetch }) => {
+    default: async ({ cookies, request, fetch }) => {
         const data = await request.formData();
         const user = data.get('user');
         const password = data.get('password');
-        console.log(user);
-        console.log(password);
-        // if (!user) {
-        // 	return fail(400, { user, missing: true });
-        // } // UI checking na lang
 
-        await fetch(`http://${PUBLIC_WEBSOCKET_URL}/login`, {
+        if (!user && !password) {
+            return { success: false };
+        }
+
+        await fetch(`http://${PUBLIC_API_URL}/login`, {
             method: 'POST',
             body: JSON.stringify({
                 username: user,
@@ -29,23 +32,16 @@ export const actions = {
         })
             .then(response => response.json())
             .then(json => {
-                //handle all redirects and setting cookies here
-                console.log(json.person_id);
-                if (json.person_id == '0') {
-                    //let ui handle displaying 'wrong credentials'
-                    console.log('wrong credentials');
-                    return { success: false };
-                }
-                if (json.person_id == '2' || json.person_id == '1') {
-                    redirect(303, 'redirect-login');
-                    return { success: false };
-                }
-
-                if (json.person_id == '3') {
-                    console.log(json.person_id);
-                    cookies.set('sessionid', json.person_id, { path: '/' });
-                    redirect(303, 'dashboard');
-                    return { success: true };
+                const { access_control } = parse(LoginOutputSchema, json);
+                switch (access_control) {
+                    case 1:
+                    case 2:
+                        redirect(303, '/redirect-login');
+                        break;
+                    case 3:
+                        cookies.set('sessionid', access_control.toString(), { path: '/' });
+                        redirect(303, '/');
+                        break;
                 }
             });
 
