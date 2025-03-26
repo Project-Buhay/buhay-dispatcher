@@ -1,7 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { parse } from 'valibot';
 
 import { PUBLIC_API_URL } from '$env/static/public';
+import { LoginOutput as LoginOutputSchema } from '$lib/models/login_output';
 
 export function load({ cookies }) {
     const access_control = cookies.get('sessionid');
@@ -30,7 +32,7 @@ export const actions = {
         })
             .then(response => response.json())
             .then(json => {
-                const { access_control } = json;
+                const { access_control } = parse(LoginOutputSchema, json);
                 switch(access_control) {
                     case 1:
                     case 2:
