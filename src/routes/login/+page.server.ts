@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { PUBLIC_WEBSOCKET_URL } from '$env/static/public';
+import { PUBLIC_API_URL } from '$env/static/public';
 import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies }) => {
@@ -17,7 +17,7 @@ export const actions = {
         // 	return fail(400, { user, missing: true });
         // } // UI checking na lang
 
-        await fetch(`http://${PUBLIC_WEBSOCKET_URL}/login`, {
+        await fetch(`http://${PUBLIC_API_URL}/login`, {
             method: 'POST',
             body: JSON.stringify({
                 username: user,

@@ -2,7 +2,7 @@
     import { parse } from 'valibot';
 
     import { browser } from '$app/environment';
-    import { PUBLIC_WEBSOCKET_ID, PUBLIC_WEBSOCKET_URL } from '$env/static/public';
+    import { PUBLIC_API_URL, PUBLIC_USER_ID } from '$env/static/public';
 
     import {
         DispatcherDatum as DispatcherDatumSchema,
@@ -22,7 +22,7 @@
     let { rescuers }: Props = $props();
 
     const socket = browser
-        ? new WebSocket(`ws://${PUBLIC_WEBSOCKET_URL}/ws/${PUBLIC_WEBSOCKET_ID}`)
+        ? new WebSocket(`ws://${PUBLIC_API_URL}/ws/${PUBLIC_USER_ID}`)
         : null;
 
     let dispatcher_data: DispatcherData = $state([]);
