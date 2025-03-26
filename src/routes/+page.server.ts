@@ -22,5 +22,5 @@ export async function load({ cookies, fetch }) {
 export const actions = {
     logout: ({ cookies }) => {
         cookies.set('sessionid', '', { path: '/' });
-    }
+    },
 } satisfies Actions;

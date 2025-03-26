@@ -8,7 +8,7 @@ import { LoginOutput as LoginOutputSchema } from '$lib/models/login_output';
 export function load({ cookies }) {
     const access_control = cookies.get('sessionid');
     return { access_control };
-};
+}
 
 export const actions = {
     default: async ({ cookies, request, fetch }) => {
@@ -33,13 +33,15 @@ export const actions = {
             .then(response => response.json())
             .then(json => {
                 const { access_control } = parse(LoginOutputSchema, json);
-                switch(access_control) {
+                switch (access_control) {
                     case 1:
                     case 2:
                         redirect(303, '/redirect-login');
+                        break;
                     case 3:
                         cookies.set('sessionid', access_control.toString(), { path: '/' });
                         redirect(303, '/');
+                        break;
                 }
             });
 

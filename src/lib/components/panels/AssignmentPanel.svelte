@@ -21,9 +21,7 @@
 
     let { rescuers }: Props = $props();
 
-    const socket = browser
-        ? new WebSocket(`ws://${PUBLIC_API_URL}/ws/${PUBLIC_USER_ID}`)
-        : null;
+    const socket = browser ? new WebSocket(`ws://${PUBLIC_API_URL}/ws/${PUBLIC_USER_ID}`) : null;
 
     let dispatcher_data: DispatcherData = $state([]);
     if (socket) {
