@@ -1,7 +1,13 @@
 <script>
+    let { form } = $props();
+
     let see_password = $state(false);
     let sign_in = $state(false);
 </script>
+
+{#if form?.message}
+    <p>{form?.message}</p>
+{/if}
 
 <form method="POST">
     <div class="auto h-screen w-full flex-1 flex-col content-center justify-center">
