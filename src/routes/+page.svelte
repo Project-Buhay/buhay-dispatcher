@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+    import AssignmentPanel from '$lib/components/panels/AssignmentPanel.svelte';
+
+    let { data } = $props();
+    let { rescuers } = $derived(data);
+</script>
+
+<AssignmentPanel {rescuers}></AssignmentPanel>
