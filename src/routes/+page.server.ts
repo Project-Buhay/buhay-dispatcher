@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import type { Actions } from './$types';
 import { parse } from 'valibot';
 
 import { PUBLIC_API_URL } from '$env/static/public';
@@ -17,3 +18,9 @@ export async function load({ cookies, fetch }) {
 
     return { rescuers };
 }
+
+export const actions = {
+    logout: ({ cookies }) => {
+        cookies.set('sessionid', '', { path: '/' });
+    }
+} satisfies Actions;
