@@ -9,8 +9,13 @@ The Dispatcher View for the Buhay app.
     - [Development](#development)
         - [Prerequisites + Links to Installation Guides](#prerequisites--links-to-installation-guides)
         - [Set-up](#set-up)
-        - [Development Proper](#development-proper)
-        - [Contributing](#contributing)
+        - [Developing on Your Local Machine](#developing-on-your-local-machine)
+            - [Update your local `main`](#update-your-local-main)
+            - [Use feature branches](#use-feature-branches)
+            - [Commit your changes](#commit-your-changes)
+        - [Pushing to the Remote Repository](#pushing-to-the-remote-repository)
+            - [Push your local feature branch to the remote](#push-your-local-feature-branch-to-the-remote)
+            - [Ensure code passes code quality checks](#ensure-code-passes-code-quality-checks)
 
 ## Development
 
@@ -43,6 +48,8 @@ The Dispatcher View for the Buhay app.
 [Git]: https://git-scm.com/downloads
 [`Schniz/fnm`]: https://github.com/Schniz/fnm/blob/master/README.md
 
+---
+
 ### Set-up
 
 Set-up the repository for developing by running the following commands _once_
@@ -66,11 +73,17 @@ PUBLIC_USER_ID
 \
 Please **ensure** that `.env` is named in the `.gitignore` file.
 
+---
+
 ### Developing on Your Local Machine
 
 **NOTE**: The usage of `git checkout` in the following instructions is the same as `git switch`.
 
-Before implementing features, fixes, and other stuff, please ensure that your **local** copy of the repository is **up-to-date** to avoid merge conflicts
+---
+
+#### Update your local `main`
+
+Before implementing features, fixes, and other stuff, please ensure that your **local** copy of the repository (i.e. your local `main` branch) is **up-to-date** to avoid merge conflicts
 
 1. Ensure you are at the `main` branch on your local machine.
     ```bash
@@ -91,7 +104,10 @@ Before implementing features, fixes, and other stuff, please ensure that your **
     git pull # shorthand for previous instructions
     ```
 
-\
+---
+
+#### Use feature branches
+
 On implementing stuff, please *avoid* committing your changes directly on the `main` branch and use **feature branches** instead. Feature branches are created by either
 ```bash
 git checkout -b <feature-branch>
@@ -119,7 +135,7 @@ pnpm dev
 
 \
 **!IMPORTANT**: Please ensure that you are developing on **top** of the most recent changes to the remote repository.
-1. Update your local `main`.
+1. [Update your local `main`.](#update-your-local-main)
 1. Update your feature branch.
     ```bash
     # Switch to your local feature branch
@@ -129,7 +145,10 @@ pnpm dev
     git rebase main
     ```
 
-\
+---
+
+#### Commit your changes
+
 Once you've done your change/s, you can now commit away! Here's a sample, standard workflow
 1. Check which files have been changed.
     ```bash
@@ -181,7 +200,11 @@ Once you've done your change/s, you can now commit away! Here's a sample, standa
 
 1. Rinse and repeat for the next changes.
 
+---
+
 ### Pushing to the Remote Repository
+
+#### Push your local feature branch to the remote
 
 To push your local feature branch to the remote, simply run
 ```bash
@@ -193,7 +216,10 @@ The command above sets your local feature branch to *track* the feature branch o
 git push
 ```
 
-\
+---
+
+#### Ensure code passes code quality checks
+
 Before merging your feature branch to the `main` branch of the remote repository, please **ensure** that the code passes the code quality checks by running
 
 ```bash
