@@ -16,6 +16,7 @@ The Dispatcher View for the Buhay app.
         - [Pushing to the Remote Repository](#pushing-to-the-remote-repository)
             - [Push your local feature branch to the remote](#push-your-local-feature-branch-to-the-remote)
             - [Ensure code passes code quality checks](#ensure-code-passes-code-quality-checks)
+            - [Clean your repository copies](#clean-your-repository-copies)
 
 ## Development
 
@@ -263,3 +264,20 @@ pnpm preview
 
 \
 Once your *local* feature branch is ready for merging to `main`, push your changes to the *remote* feature branch and make a pull request. Once again, **ensure** that the code in your [remote] feature branch passes the code quality checks.
+
+---
+
+#### Clean your repository copies
+
+Once your feature branch is merged, please **prune** your branch. This means 
+1. deleting your feature branch in the remote, and
+1. deleting your feature branch in your local repository by 
+    1. [updating your local `main`.](#update-your-local-main)
+    1. running
+        ```bash
+        # Delete your local feature branch
+        git branch -d <feature-branch>
+
+        # Prune the connection to the deleted remote feature branch
+        git remote prune origin
+        ```
