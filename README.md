@@ -87,11 +87,13 @@ Please **ensure** that `.env` is named in the `.gitignore` file.
 Before implementing features, fixes, and other stuff, please ensure that your **local** copy of the repository (i.e. your local `main` branch) is **up-to-date** to avoid merge conflicts
 
 1. Ensure you are at the `main` branch on your local machine.
+
     ```bash
     git checkout main # or git switch main
     ```
 
 1. Get and download the latest changes from the `main` branch at the remote by either
+
     ```bash
     # Getting the latest changes from the remote
     git fetch
@@ -101,6 +103,7 @@ Before implementing features, fixes, and other stuff, please ensure that your **
     ```
 
     or simply
+
     ```bash
     git pull # shorthand for previous instructions
     ```
@@ -109,17 +112,20 @@ Before implementing features, fixes, and other stuff, please ensure that your **
 
 #### Use feature branches
 
-On implementing stuff, please *avoid* committing your changes directly on the `main` branch and use **feature branches** instead. Feature branches are created by either
+On implementing stuff, please _avoid_ committing your changes directly on the `main` branch and use **feature branches** instead. Feature branches are created by either
+
 ```bash
 git checkout -b <feature-branch>
 ```
 
 or
+
 ```bash
 git switch -c <feature-branch>
 ```
 
 Example:
+
 ```bash
 git checkout -b login-page
 git switch -c bugfix/overflow-issue
@@ -136,8 +142,10 @@ pnpm dev
 
 \
 **!IMPORTANT**: Please ensure that you are developing on **top** of the most recent changes to the remote repository.
+
 1. [Update your local `main`.](#update-your-local-main)
 1. Update your feature branch.
+
     ```bash
     # Switch to your local feature branch
     git checkout <feature-branch> # or git switch <feature-branch>
@@ -151,36 +159,43 @@ pnpm dev
 #### Commit your changes
 
 Once you've done your change/s, you can now commit away! Here's a sample, standard workflow
+
 1. Check which files have been changed.
+
     ```bash
     git status
     ```
 
-1. Committing is essentially taking a snapshot/picture of your changes. Thus, we put our changes in front of the "camera" by *staging* them. You can either
+1. Committing is essentially taking a snapshot/picture of your changes. Thus, we put our changes in front of the "camera" by _staging_ them. You can either
+
     - stage all files for committing
         ```bash
         git add .
         ```
     - or fine-grain the files your want to add in the "picture" by either
-        - adding files one-by-one 
+
+        - adding files one-by-one
+
             ```bash
             git add <relative-path-to-file>
             ```
 
-        - or adding per *chunk* of code in a file
+        - or adding per _chunk_ of code in a file
             ```bash
             git add -p <relative-path-to-file>
             ```
 
         Example: If your terminal is at the root directory of this repository,
+
         ```bash
         git add 'src/routes/+page.svelte'
         git add -p 'src/routes/login/+page.server.ts'
         ```
-    
-    **NOTE**: It is highly recommended to make your commits *atomic* &mdash; one commit contains one specific *change*. This one change can span multiple files.
+
+    **NOTE**: It is highly recommended to make your commits _atomic_ &mdash; one commit contains one specific _change_. This one change can span multiple files.
 
 1. Commit with a meaningful message.
+
     ```bash
     git commit -m <your-message-here>
     ```
@@ -188,6 +203,7 @@ Once you've done your change/s, you can now commit away! Here's a sample, standa
     **NOTE**: It is highly recommended to use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) System for your commit message.
 
     Example:
+
     ```bash
     git commit -m 'feat: add `Route` schema'
     git commit -m 'fix(`Route`): make `location_names` attribute nullable'
@@ -195,6 +211,7 @@ Once you've done your change/s, you can now commit away! Here's a sample, standa
     ```
 
 1. Check the commit history of your branch.
+
     ```bash
     git log --oneline
     ```
@@ -208,11 +225,13 @@ Once you've done your change/s, you can now commit away! Here's a sample, standa
 #### Push your local feature branch to the remote
 
 To push your local feature branch to the remote, simply run
+
 ```bash
 git push -u origin <feature-branch>
 ```
 
-The command above sets your local feature branch to *track* the feature branch of the same name in the remote aside from pushing your changes. As such, for pushing further commits to the remote feature branch, simply run
+The command above sets your local feature branch to _track_ the feature branch of the same name in the remote aside from pushing your changes. As such, for pushing further commits to the remote feature branch, simply run
+
 ```bash
 git push
 ```
@@ -263,17 +282,20 @@ pnpm preview
 ```
 
 \
-Once your *local* feature branch is ready for merging to `main`, push your changes to the *remote* feature branch and make a pull request. Once again, **ensure** that the code in your [remote] feature branch passes the code quality checks.
+Once your _local_ feature branch is ready for merging to `main`, push your changes to the _remote_ feature branch and make a pull request. Once again, **ensure** that the code in your [remote] feature branch passes the code quality checks.
 
 ---
 
 #### Clean your repository copies
 
-Once your feature branch is merged, please **prune** your branch. This means 
+Once your feature branch is merged, please **prune** your branch. This means
+
 1. deleting your feature branch in the remote, and
-1. deleting your feature branch in your local repository by 
+1. deleting your feature branch in your local repository by
+
     1. [updating your local `main`.](#update-your-local-main)
     1. running
+
         ```bash
         # Delete your local feature branch
         git branch -d <feature-branch>
