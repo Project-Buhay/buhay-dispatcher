@@ -66,7 +66,50 @@ PUBLIC_USER_ID
 \
 Please **ensure** that `.env` is named in the `.gitignore` file.
 
-### Development Proper
+### Developing on Your Local Machine
+
+**NOTE**: The usage of `git checkout` in the following instructions is the same as `git switch`.
+
+Before implementing features, fixes, and other stuff, please ensure that your **local** copy of the repository is **up-to-date** to avoid merge conflicts
+
+1. Ensure you are at the `main` branch on your local machine.
+    ```bash
+    git checkout main # or git switch main
+    ```
+
+1. Get and download the latest changes from the `main` branch at the remote by either
+    ```bash
+    # Getting the latest changes from the remote
+    git fetch
+
+    # Merging it to your local copy
+    git merge --no-commit
+    ```
+
+    or simply
+    ```bash
+    git pull # shorthand for previous instructions
+    ```
+
+\
+On implementing stuff, please *avoid* committing your changes directly on the `main` branch and use **feature branches** instead. Feature branches are created by either
+```bash
+git checkout -b <feature-branch>
+```
+
+or
+```bash
+git switch -c <feature-branch>
+```
+
+Example:
+```bash
+git checkout -b login-page
+git switch -c bugfix/overflow-issue
+```
+
+\
+**NOTE**: It is recommended to keep to one feature per feature branch.
 
 To see frontend changes in real time, start a developer server by running
 
@@ -74,9 +117,84 @@ To see frontend changes in real time, start a developer server by running
 pnpm dev
 ```
 
-### Contributing
+\
+**!IMPORTANT**: Please ensure that you are developing on **top** of the most recent changes to the remote repository.
+1. Update your local `main`.
+1. Update your feature branch.
+    ```bash
+    # Switch to your local feature branch
+    git checkout <feature-branch> # or git switch <feature-branch>
 
-Before pushing to the GitHub repository, please ensure that the code passes the code quality checks by running
+    # Put the feature branch commits on top of the `main` branch
+    git rebase main
+    ```
+
+\
+Once you've done your change/s, you can now commit away! Here's a sample, standard workflow
+1. Check which files have been changed.
+    ```bash
+    git status
+    ```
+
+1. Committing is essentially taking a snapshot/picture of your changes. Thus, we put our changes in front of the "camera" by *staging* them. You can either
+    - stage all files for committing
+        ```bash
+        git add .
+        ```
+    - or fine-grain the files your want to add in the "picture" by either
+        - adding files one-by-one 
+            ```bash
+            git add <relative-path-to-file>
+            ```
+
+        - or adding per *chunk* of code in a file
+            ```bash
+            git add -p <relative-path-to-file>
+            ```
+
+        Example: If your terminal is at the root directory of this repository,
+        ```bash
+        git add 'src/routes/+page.svelte'
+        git add -p 'src/routes/login/+page.server.ts'
+        ```
+    
+    **NOTE**: It is highly recommended to make your commits *atomic* &mdash; one commit contains one specific *change*. This one change can span multiple files.
+
+1. Commit with a meaningful message.
+    ```bash
+    git commit -m <your-message-here>
+    ```
+
+    **NOTE**: It is highly recommended to use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) System for your commit message.
+
+    Example:
+    ```bash
+    git commit -m 'feat: add `Route` schema'
+    git commit -m 'fix(`Route`): make `location_names` attribute nullable'
+    git commit -m 'chore: run formatters and linters'
+    ```
+
+1. Check the commit history of your branch.
+    ```bash
+    git log --oneline
+    ```
+
+1. Rinse and repeat for the next changes.
+
+### Pushing to the Remote Repository
+
+To push your local feature branch to the remote, simply run
+```bash
+git push -u origin <feature-branch>
+```
+
+The command above sets your local feature branch to *track* the feature branch of the same name in the remote aside from pushing your changes. As such, for pushing further commits to the remote feature branch, simply run
+```bash
+git push
+```
+
+\
+Before merging your feature branch to the `main` branch of the remote repository, please **ensure** that the code passes the code quality checks by running
 
 ```bash
 # Ensure style consistency in the codebase by applying Prettier formatting
@@ -116,3 +234,6 @@ pnpm build
 # See the app in production-state on your local machine
 pnpm preview
 ```
+
+\
+Once your *local* feature branch is ready for merging to `main`, push your changes to the *remote* feature branch and make a pull request. Once again, **ensure** that the code in your [remote] feature branch passes the code quality checks.
