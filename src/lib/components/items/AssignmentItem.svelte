@@ -3,6 +3,7 @@
 
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
+    import { PUBLIC_API_URL } from '$env/static/public';
 
     interface Props {
         dispatcher_datum: DispatcherDatum;
@@ -15,7 +16,7 @@
 
     let are_locs_displayed = $state(false);
     let is_assigned = $state(false);
-
+    let val = $state()
     function displayLocs() {
         are_locs_displayed = !are_locs_displayed;
     }
@@ -48,7 +49,9 @@
     <div class="mr-10 w-1/6 content-center">
         <select
             name="ass_rescuer"
+            bind:value={val}
             onchange={() => (is_assigned = false)}
+
             class="ml-[42px] w-full rounded-xl bg-white text-black"
             disabled={route_info_id === null || route_info_id === undefined}
         >
@@ -57,14 +60,20 @@
                 <option class="bg-black text-white" value={person_id}>{username}</option>
             {/each}
         </select>
+        
     </div>
 
     <!-- Assign Button -->
     <div class="ml-30 flex-initial basis-1/6 content-center justify-center">
-        {#if is_assigned}
+        {#if is_assigned }
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                 disabled>Assigned</button
+            >
+        {:else if val == "" }
+            <button
+                class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
+                disabled>no assigned</button
             >
         {:else}
             <button
@@ -72,7 +81,21 @@
         font-semibold {route_info_id === null || route_info_id === undefined
                     ? ''
                     : 'hover:bg-white hover:text-black hover:duration-150'}"
-                onclick={() => (is_assigned = !is_assigned)}
+                onclick={
+                    () => (is_assigned = !is_assigned,
+                        fetch(`http://${PUBLIC_API_URL}/assign`, {
+                            mode: 'cors',
+                            method: 'POST',
+                            body: JSON.stringify({
+                                request_id: request_id,
+                                rescuer_id: val
+                                }),
+                            headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                                        }
+                        })
+                    )
+                }
                 disabled={route_info_id === null || route_info_id === undefined}>Assign</button
             >
         {/if}
