@@ -21,7 +21,9 @@
     }
 
     async function assign() {
-        const res = await fetch(`/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`);
+        const res = await fetch(
+            `/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`,
+        );
 
         // TODO: detect `rescuer_id` changes and update on change
         const { success } = await res.json();
@@ -73,23 +75,27 @@
         {#if !(rescuer_id === null)}
             {#if selected_rescuer_id === rescuer_id}
                 <button
-                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white" disabled>Assigned</button
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
+                    disabled>Assigned</button
                 >
             {:else}
                 <button
-                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4 font-semibold {selected_rescuer_id === null ? 'text-white/50' : 'hover:bg-white hover:text-black hover:duration-150'}"
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4 font-semibold {selected_rescuer_id ===
+                    null
+                        ? 'text-white/50'
+                        : 'hover:bg-white hover:text-black hover:duration-150'}"
                     onclick={assign}
-                    disabled={selected_rescuer_id === null}
-                    >Reassign</button
+                    disabled={selected_rescuer_id === null}>Reassign</button
                 >
             {/if}
         {:else}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
-        font-semibold {selected_rescuer_id === null ? 'text-white/50' : 'hover:bg-white hover:text-black hover:duration-150'}"
+        font-semibold {selected_rescuer_id === null
+                    ? 'text-white/50'
+                    : 'hover:bg-white hover:text-black hover:duration-150'}"
                 onclick={assign}
-                disabled={selected_rescuer_id === null}
-                >Assign</button
+                disabled={selected_rescuer_id === null}>Assign</button
             >
         {/if}
     </div>
