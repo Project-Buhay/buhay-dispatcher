@@ -23,8 +23,7 @@
 
     async function assign() {
         is_assigned = !is_assigned;
-        const updated = await fetch(`/assign?request_id=${request_id}&rescuer_id=${rescuer_id}`);
-        console.log(updated);
+        await fetch(`/assign?request_id=${request_id}&rescuer_id=${rescuer_id}`);
     }
 </script>
 
@@ -56,8 +55,7 @@
         <select
             name="ass_rescuer"
             bind:value={rescuer_id}
-            onchange={() => is_assigned = false}
-
+            onchange={() => (is_assigned = false)}
             class="ml-[42px] w-full rounded-xl bg-white text-black"
             disabled={route_info_id === null || route_info_id === undefined}
         >
@@ -66,7 +64,6 @@
                 <option class="bg-black text-white" value={person_id}>{username}</option>
             {/each}
         </select>
-        
     </div>
 
     <!-- Assign Button -->
@@ -76,7 +73,7 @@
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                 disabled>Assigned</button
             >
-        {:else if rescuer_id == ""}
+        {:else if rescuer_id == ''}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                 disabled>no assigned</button

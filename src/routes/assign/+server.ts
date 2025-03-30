@@ -10,15 +10,12 @@ export async function GET({ fetch, url }) {
         method: 'POST',
         body: JSON.stringify({
             request_id: request_id,
-            rescuer_id: rescuer_id
+            rescuer_id: rescuer_id,
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     });
 
-    const res = await updated.json()
-
-    console.log(res);
     return json(updated);
 }
