@@ -10,7 +10,7 @@
     }
 
     let { dispatcher_datum, rescuers }: Props = $props();
-    let { request_id, route_info_id, parsed_coordinate_names } = $derived(dispatcher_datum);
+    let { request_id, parsed_coordinate_names } = $derived(dispatcher_datum);
     let { location_names } = $derived(parsed_coordinate_names);
 
     let are_locs_displayed = $state(false);
@@ -57,7 +57,6 @@
             bind:value={rescuer_id}
             onchange={() => (is_assigned = false)}
             class="ml-[42px] w-full rounded-xl bg-white text-black"
-            disabled={route_info_id === null || route_info_id === undefined}
         >
             <option class="bg-black text-white" value="" selected>Choose</option>
             {#each rescuers as { person_id, username }}
@@ -81,11 +80,9 @@
         {:else}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
-        font-semibold {route_info_id === null || route_info_id === undefined
-                    ? ''
-                    : 'hover:bg-white hover:text-black hover:duration-150'}"
+        font-semibold hover:bg-white hover:text-black hover:duration-150"
                 onclick={assign}
-                disabled={route_info_id === null || route_info_id === undefined}>Assign</button
+                >Assign</button
             >
         {/if}
     </div>
