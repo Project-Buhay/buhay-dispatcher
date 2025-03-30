@@ -5,10 +5,6 @@
     let sign_in = $state(false);
 </script>
 
-{#if form?.message}
-    <p>{form?.message}</p>
-{/if}
-
 <form method="POST">
     <div class="auto h-screen w-full flex-1 flex-col content-center justify-center">
         <h1 class="mb-10 w-full text-center text-5xl font-semibold">Login to Buhay</h1>
@@ -19,19 +15,21 @@
                     name="user"
                     type="text"
                     class="flex w-[250px] rounded-xl selection:bg-blue-neutral selection:text-white focus:bg-blue-white
-                                      {sign_in ? 'bg-light-gray' : ''}"
+                                      {sign_in ? 'bg-light-gray' : ''}
+                                      {form?.message ? 'border-buhay-red border-[2px]' : ''} "
                     placeholder="Username"
                     disabled={sign_in}
                 />
             </div>
 
-            <div class="mb-8 flex w-full justify-center">
+            <div class="flex w-full justify-center {form?.message ? 'mb-5' : 'mb-3'}">
                 <div class="relative">
                     <input
                         name="password"
                         type={see_password ? 'text' : 'password'}
                         class="w-[250px] rounded-xl focus:bg-blue-white
-                                                                 {sign_in ? 'bg-light-gray' : ''}"
+                                {sign_in ? 'bg-light-gray' : ''}
+                                {form?.message ? 'border-buhay-red border-[2px]' : ''}"
                         placeholder="Password"
                         disabled={sign_in}
                     />
@@ -52,6 +50,12 @@
                         />
                     </button>
                 </div>
+            </div>
+
+            <div class="flex w-full justify-center mb-5 {form?.message ? 'visible' : 'invisible'}">
+                {#if form?.message}
+                    <p class='text-buhay-red font-semibold '>{form?.message}</p>
+                {/if}
             </div>
 
             <div class="flex w-full justify-center">
