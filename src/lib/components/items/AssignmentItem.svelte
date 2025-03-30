@@ -10,20 +10,26 @@
     }
 
     let { dispatcher_datum, rescuers }: Props = $props();
-    let { request_id, route_info_id, parsed_coordinate_names } = $derived(dispatcher_datum);
+    let { request_id, rescuer_id, parsed_coordinate_names } = $derived(dispatcher_datum);
     let { location_names } = $derived(parsed_coordinate_names);
 
     let are_locs_displayed = $state(false);
-    let is_assigned = $state(false);
-    let rescuer_id = $state('');
+    let selected_rescuer_id = $derived(rescuer_id);
 
     function displayLocs() {
         are_locs_displayed = !are_locs_displayed;
     }
 
     async function assign() {
-        is_assigned = !is_assigned;
-        await fetch(`/assign?request_id=${request_id}&rescuer_id=${rescuer_id}`);
+        const res = await fetch(
+            `/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`,
+        );
+
+        // TODO: detect `rescuer_id` changes and update on change
+        const { success } = await res.json();
+        if (success) {
+            rescuer_id = selected_rescuer_id;
+        }
     }
 </script>
 
@@ -54,12 +60,10 @@
     <div class="mr-10 w-1/6 content-center">
         <select
             name="ass_rescuer"
-            bind:value={rescuer_id}
-            onchange={() => (is_assigned = false)}
+            bind:value={selected_rescuer_id}
             class="ml-[42px] w-full rounded-xl bg-white text-black"
-            disabled={route_info_id === null || route_info_id === undefined}
         >
-            <option class="bg-black text-white" value="" selected>Choose</option>
+            <option class="bg-black text-white" value={null}>Choose</option>
             {#each rescuers as { person_id, username }}
                 <option class="bg-black text-white" value={person_id}>{username}</option>
             {/each}
@@ -68,24 +72,30 @@
 
     <!-- Assign Button -->
     <div class="ml-30 flex-initial basis-1/6 content-center justify-center">
-        {#if is_assigned}
-            <button
-                class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
-                disabled>Assigned</button
-            >
-        {:else if rescuer_id == ''}
-            <button
-                class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
-                disabled>no assigned</button
-            >
+        {#if !(rescuer_id === null)}
+            {#if selected_rescuer_id === rescuer_id}
+                <button
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
+                    disabled>Assigned</button
+                >
+            {:else}
+                <button
+                    class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4 font-semibold {selected_rescuer_id ===
+                    null
+                        ? 'text-white/50'
+                        : 'hover:bg-white hover:text-black hover:duration-150'}"
+                    onclick={assign}
+                    disabled={selected_rescuer_id === null}>Reassign</button
+                >
+            {/if}
         {:else}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
-        font-semibold {route_info_id === null || route_info_id === undefined
-                    ? ''
+        font-semibold {selected_rescuer_id === null
+                    ? 'text-white/50'
                     : 'hover:bg-white hover:text-black hover:duration-150'}"
                 onclick={assign}
-                disabled={route_info_id === null || route_info_id === undefined}>Assign</button
+                disabled={selected_rescuer_id === null}>Assign</button
             >
         {/if}
     </div>

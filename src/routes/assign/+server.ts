@@ -1,5 +1,3 @@
-import { json } from '@sveltejs/kit';
-
 import { PUBLIC_API_URL } from '$env/static/public';
 
 export async function GET({ fetch, url }) {
@@ -17,5 +15,5 @@ export async function GET({ fetch, url }) {
         },
     });
 
-    return json(updated);
+    return updated;
 }
