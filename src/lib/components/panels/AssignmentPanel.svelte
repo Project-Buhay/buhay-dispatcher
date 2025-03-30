@@ -27,6 +27,12 @@
     if (socket) {
         socket.addEventListener('message', message => {
             const parsed_json = parse(DispatcherDatumSchema, JSON.parse(message.data));
+
+            const { route_info_id, ongoing } = parsed_json;
+            if (route_info_id === null || route_info_id === undefined || ongoing) {
+                return;
+            }
+
             const parsed_coordinate_names = parse(
                 RouteSchema,
                 JSON.parse(parsed_json.coordinate_names),
