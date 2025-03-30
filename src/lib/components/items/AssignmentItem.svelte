@@ -15,9 +15,15 @@
 
     let are_locs_displayed = $state(false);
     let is_assigned = $state(false);
+    let rescuer_id = $state('');
 
     function displayLocs() {
         are_locs_displayed = !are_locs_displayed;
+    }
+
+    async function assign() {
+        is_assigned = !is_assigned;
+        await fetch(`/assign?request_id=${request_id}&rescuer_id=${rescuer_id}`);
     }
 </script>
 
@@ -48,6 +54,7 @@
     <div class="mr-10 w-1/6 content-center">
         <select
             name="ass_rescuer"
+            bind:value={rescuer_id}
             onchange={() => (is_assigned = false)}
             class="ml-[42px] w-full rounded-xl bg-white text-black"
             disabled={route_info_id === null || route_info_id === undefined}
@@ -66,13 +73,18 @@
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                 disabled>Assigned</button
             >
+        {:else if rescuer_id == ''}
+            <button
+                class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
+                disabled>no assigned</button
+            >
         {:else}
             <button
                 class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl p-4
         font-semibold {route_info_id === null || route_info_id === undefined
                     ? ''
                     : 'hover:bg-white hover:text-black hover:duration-150'}"
-                onclick={() => (is_assigned = !is_assigned)}
+                onclick={assign}
                 disabled={route_info_id === null || route_info_id === undefined}>Assign</button
             >
         {/if}
