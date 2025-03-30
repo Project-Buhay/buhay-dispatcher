@@ -1,11 +1,20 @@
 <script>
+    import { enhance } from "$app/forms";
+
     let { form } = $props();
 
     let see_password = $state(false);
     let sign_in = $state(false);
 </script>
 
-<form method="POST">
+<form method="POST" use:enhance={({formElement}) => {
+    sign_in = !sign_in; 
+    if (form != null) form = null;
+    return async ({result, update}) => {
+        update();
+        if (result.type != 'redirect') sign_in = false;
+    };
+}}>
     <div class="auto h-screen w-full flex-1 flex-col content-center justify-center">
         <h1 class="mb-10 w-full text-center text-5xl font-semibold">Login to Buhay</h1>
 
@@ -19,6 +28,7 @@
                                       {form?.message ? 'border-buhay-red border-[2px]' : ''} "
                     placeholder="Username"
                     disabled={sign_in}
+                    required
                 />
             </div>
 
@@ -32,6 +42,7 @@
                                 {form?.message ? 'border-buhay-red border-[2px]' : ''}"
                         placeholder="Password"
                         disabled={sign_in}
+                        required
                     />
                     <button
                         onclick={event => {
@@ -67,9 +78,6 @@
                         ? 'w-[100px] bg-blue-neutral font-medium hover:border-black hover:bg-[#a6dcf5] hover:text-black hover:duration-150'
                         : 'w-[200px bg-[#144359] font-semibold drop-shadow-xl'}"
                     disabled={sign_in}
-                    onsubmit={() => {
-                        sign_in = !sign_in;
-                    }}
                 >
                     {!sign_in ? 'Sign In' : 'Signing In'}</button
                 >
