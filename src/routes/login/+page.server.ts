@@ -20,7 +20,7 @@ export const actions = {
             return fail(400);
         }
 
-        await fetch(`http://${PUBLIC_API_URL}/login`, {
+        await fetch(`https://${PUBLIC_API_URL}/login`, {
             method: 'POST',
             body: JSON.stringify({
                 username: user,
