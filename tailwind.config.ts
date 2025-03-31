@@ -19,6 +19,7 @@ export default {
             white: '#FFFFFF',
             transparent: '#00000000',
             'buhay-red': '#AD2121',
+            'buhay-green': '#4CA682',
         },
         extend: {
             typography: ({ theme }) => ({
