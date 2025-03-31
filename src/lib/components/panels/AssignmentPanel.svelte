@@ -52,7 +52,7 @@
 </script>
 
 <div
-    class="my-10 flex w-5/6 content-center rounded-xl bg-buhay-red p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+    class="my-10 flex w-5/6 content-center rounded-xl bg-buhay-green p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
 >
     <div class="mr-10 w-1/6 text-center text-2xl font-semibold">Request ID</div>
     <div class="mr-10 w-1/3 text-center text-2xl font-semibold">Route Location Names</div>
