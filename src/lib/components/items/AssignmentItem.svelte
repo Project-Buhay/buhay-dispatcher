@@ -5,8 +5,6 @@
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
 
-    import { onMount } from 'svelte';
-
     interface Props {
         dispatcher_datum: DispatcherDatum;
         rescuers: Rescuers;
@@ -37,7 +35,7 @@
 
     $effect(() => {
         selected_rescuer_id = rescuer_id;
-    })
+    });
 </script>
 
 {#if !reassigned}
