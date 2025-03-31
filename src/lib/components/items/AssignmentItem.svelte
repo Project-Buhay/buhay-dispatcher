@@ -4,8 +4,6 @@
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
 
-    import { onMount } from 'svelte';
-
     interface Props {
         dispatcher_datum: DispatcherDatum;
         rescuers: Rescuers;
@@ -16,7 +14,8 @@
     let { location_names } = $derived(parsed_coordinate_names);
 
     let are_locs_displayed = $state(false);
-    let selected_rescuer_id = $state();
+    let selected_rescuer_id = $derived(rescuer_id);
+    let reassigned = $state(false);
 
     function displayLocs() {
         are_locs_displayed = !are_locs_displayed;
@@ -27,18 +26,14 @@
             `/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`,
         );
 
-        // TODO: detect `rescuer_id` changes and update on change
         const { success } = await res.json();
         if (success) {
-            //rescuer_id = selected_rescuer_id;
+            reassigned = true;
         }
     }
-
-    onMount(() => {
-        selected_rescuer_id = rescuer_id;
-    });
 </script>
 
+{#if !reassigned}
 <div
     class="my-10 flex w-5/6 content-center rounded-xl bg-blue-neutral p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
 >
@@ -108,3 +103,4 @@
 
     <!-- Calculate TSP (if needed)-->
 </div>
+{/if}
