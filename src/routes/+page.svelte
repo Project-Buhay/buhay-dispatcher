@@ -8,6 +8,6 @@
 
 <AssignmentPanel {rescuers}></AssignmentPanel>
 
-<div class="fixed top-0 left-0 z-50">
+<div class="fixed left-0 top-0 z-50">
     <NavBar />
 </div>

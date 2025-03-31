@@ -1,5 +1,5 @@
 <script>
-    import { enhance } from "$app/forms";
+    import { enhance } from '$app/forms';
 
     let { form } = $props();
 
@@ -7,14 +7,17 @@
     let sign_in = $state(false);
 </script>
 
-<form method="POST" use:enhance={({formElement}) => {
-    sign_in = !sign_in; 
-    if (form != null) form = null;
-    return async ({result, update}) => {
-        update();
-        if (result.type != 'redirect') sign_in = false;
-    };
-}}>
+<form
+    method="POST"
+    use:enhance={() => {
+        sign_in = !sign_in;
+        if (form != null) form = null;
+        return async ({ result, update }) => {
+            update();
+            if (result.type != 'redirect') sign_in = false;
+        };
+    }}
+>
     <div class="auto h-screen w-full flex-1 flex-col content-center justify-center">
         <h1 class="mb-10 w-full text-center text-5xl font-semibold">Login to Buhay</h1>
 
@@ -25,7 +28,7 @@
                     type="text"
                     class="flex w-[250px] rounded-xl selection:bg-blue-neutral selection:text-white focus:bg-blue-white
                                       {sign_in ? 'bg-light-gray' : ''}
-                                      {form?.message ? 'border-buhay-red border-[2px]' : ''} "
+                                      {form?.message ? 'border-[2px] border-buhay-red' : ''} "
                     placeholder="Username"
                     disabled={sign_in}
                     required
@@ -39,7 +42,7 @@
                         type={see_password ? 'text' : 'password'}
                         class="w-[250px] rounded-xl focus:bg-blue-white
                                 {sign_in ? 'bg-light-gray' : ''}
-                                {form?.message ? 'border-buhay-red border-[2px]' : ''}"
+                                {form?.message ? 'border-[2px] border-buhay-red' : ''}"
                         placeholder="Password"
                         disabled={sign_in}
                         required
@@ -63,9 +66,9 @@
                 </div>
             </div>
 
-            <div class="flex w-full justify-center mb-5 {form?.message ? 'visible' : 'invisible'}">
+            <div class="mb-5 flex w-full justify-center {form?.message ? 'visible' : 'invisible'}">
                 {#if form?.message}
-                    <p class='text-buhay-red font-semibold '>{form?.message}</p>
+                    <p class="font-semibold text-buhay-red">{form?.message}</p>
                 {/if}
             </div>
 

@@ -36,7 +36,7 @@
 
     onMount(() => {
         selected_rescuer_id = rescuer_id;
-    })
+    });
 </script>
 
 <div
