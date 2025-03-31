@@ -28,9 +28,15 @@
         socket.addEventListener('message', message => {
             const parsed_json = parse(DispatcherDatumSchema, JSON.parse(message.data));
 
-            const { route_info_id, ongoing } = parsed_json;
-            if (route_info_id === null || ongoing) {
+            const { route_info_id, request_id, rescued, ongoing } = parsed_json;
+            if (route_info_id === null) {
                 return;
+            }
+            if (ongoing || rescued) {
+                for (let a = 0; a < dispatcher_data.length; a++) {
+                    if (dispatcher_data[a].request_id == request_id) dispatcher_data.splice(a, 1);
+                }
+                if (rescued) return;
             }
 
             const parsed_coordinate_names = parse(
