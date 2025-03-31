@@ -12,7 +12,7 @@ export async function load({ cookies, fetch }) {
         redirect(307, '/login');
     }
 
-    const response = await fetch(`http://${PUBLIC_API_URL}/get_rescuers`, { method: 'POST' });
+    const response = await fetch(`https://${PUBLIC_API_URL}/get_rescuers`, { method: 'POST' });
     const raw_json = await response.json();
     const rescuers = parse(RescuersSchema, raw_json.rescuers);
 

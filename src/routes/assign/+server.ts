@@ -4,7 +4,7 @@ export async function GET({ fetch, url }) {
     const request_id = url.searchParams.get('request_id');
     const rescuer_id = url.searchParams.get('rescuer_id');
 
-    const updated = await fetch(`http://${PUBLIC_API_URL}/assign`, {
+    const updated = await fetch(`https://${PUBLIC_API_URL}/assign`, {
         method: 'POST',
         body: JSON.stringify({
             request_id: request_id,
