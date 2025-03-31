@@ -5,17 +5,19 @@
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
 
+    import { onMount } from 'svelte';
+
     interface Props {
         dispatcher_datum: DispatcherDatum;
         rescuers: Rescuers;
     }
 
     let { dispatcher_datum, rescuers }: Props = $props();
-    let { request_id, rescuer_id, parsed_coordinate_names } = $derived(dispatcher_datum);
+    let { request_id, rescuer_id, parsed_coordinate_names, ongoing } = $derived(dispatcher_datum);
     let { location_names } = $derived(parsed_coordinate_names);
 
     let are_locs_displayed = $state(false);
-    let selected_rescuer_id = $derived(rescuer_id);
+    let selected_rescuer_id = $state();
     let reassigned = $state(false);
 
     function displayLocs() {
@@ -32,6 +34,10 @@
             reassigned = true;
         }
     }
+
+    $effect(() => {
+        selected_rescuer_id = rescuer_id;
+    })
 </script>
 
 {#if !reassigned}
@@ -66,6 +72,7 @@
                 name="ass_rescuer"
                 bind:value={selected_rescuer_id}
                 class="ml-[42px] w-full rounded-xl bg-white text-black"
+                disabled={reassigned || ongoing}
             >
                 <option class="bg-black text-white" value={null}>Choose</option>
                 {#each rescuers as { person_id, username }}
@@ -77,7 +84,7 @@
         <!-- Assign Button -->
         <div class="ml-30 flex-initial basis-1/6 content-center justify-center">
             {#if !(rescuer_id === null)}
-                {#if selected_rescuer_id === rescuer_id}
+                {#if ongoing}
                     <button
                         class="ml-[42px] h-16 w-[125px] flex-initial rounded-2xl bg-[#144359] p-4 font-bold text-white"
                         disabled>Assigned</button
