@@ -1,4 +1,6 @@
 <script>
+    import { Eye, EyeClosed } from 'lucide-svelte';
+
     import { enhance } from '$app/forms';
 
     let { form } = $props();
@@ -55,13 +57,11 @@
                         class="absolute right-4 top-[12px]"
                         disabled={sign_in}
                     >
-                        <img
-                            src={!see_password
-                                ? '../src/lib/icons/eye.svg'
-                                : '../src/lib/icons/closed_eye.svg'}
-                            alt="show password"
-                            class="h-5 w-5"
-                        />
+                        {#if see_password}
+                            <Eye class="h-5 w-5" />
+                        {:else}
+                            <EyeClosed class="h-5 w-5" />
+                        {/if}
                     </button>
                 </div>
             </div>
