@@ -1,5 +1,6 @@
 <script lang="ts">
     import { ChevronDownCircle, ChevronUpCircle } from 'lucide-svelte';
+    import { fly } from 'svelte/transition';
 
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
@@ -36,6 +37,7 @@
 {#if !reassigned}
 <div
     class="my-10 flex w-5/6 content-center rounded-xl bg-blue-neutral p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+    in:fly|global={{ x: -100 }} out:fly={{ x: 100 }}
 >
     <!-- Request ID -->
     <div class="mr-10 w-1/6 flex-initial content-center text-2xl font-bold">
