@@ -57,12 +57,26 @@
     }
 </script>
 
-<div
-    class="my-10 flex w-5/6 content-center rounded-xl bg-buhay-green p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
->
-    <div class="mr-10 w-1/6 text-center text-2xl font-semibold">Request ID</div>
-    <div class="mr-10 w-1/3 text-center text-2xl font-semibold">Route Location Names</div>
-    <div class="mr-10 w-[36.5%] text-center text-2xl font-semibold">Assign Rescuer</div>
+<div class="flex w-full content-center justify-center">
+    <div
+        class="auto mb-4 mt-10 flex w-5/6 content-center rounded-xl bg-buhay-green p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+    >
+        <div
+            class="text-md w-1/2 flex-initial content-center text-center font-semibold md:text-lg lg:mr-10 lg:w-1/6 lg:text-2xl"
+        >
+            Request ID
+        </div>
+        <div
+            class="text-md w-1/2 content-center text-center font-semibold md:text-lg lg:mr-16 lg:w-1/3 lg:text-2xl"
+        >
+            Route Location Names
+        </div>
+        <div
+            class="text-md invisible w-[0%] flex-initial font-semibold md:w-[36.5%] md:content-center md:text-center md:text-lg lg:visible lg:text-2xl"
+        >
+            Rescuer Assignment
+        </div>
+    </div>
 </div>
 
 {#each dispatcher_data as dispatcher_datum}

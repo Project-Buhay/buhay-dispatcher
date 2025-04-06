@@ -4,12 +4,12 @@
     let show_navbar = $state(false);
 </script>
 
-<div class="relative m-12">
+<div class="relative m-12 lg:m-12">
     {#if show_navbar}
         <form
             method="POST"
             transition:slide
-            class="absolute top-[16px] rounded-2xl bg-buhay-green pt-12"
+            class="absolute bottom-[-32px] rounded-2xl bg-buhay-green pb-8 lg:top-[16px] lg:pt-12"
         >
             <button
                 formaction="?/logout"
