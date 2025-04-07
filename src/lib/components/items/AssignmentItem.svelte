@@ -21,9 +21,7 @@
     }
 
     async function assign() {
-        await fetch(
-            `/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`,
-        );
+        await fetch(`/assign?request_id=${request_id}&rescuer_id=${selected_rescuer_id}`);
     }
 
     $effect(() => {
