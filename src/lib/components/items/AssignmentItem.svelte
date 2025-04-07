@@ -1,6 +1,5 @@
 <script lang="ts">
     import { ChevronDownCircle, ChevronUpCircle } from 'lucide-svelte';
-    import { fly } from 'svelte/transition';
 
     import type { DispatcherDatum } from '$lib/models/dispatcher_data';
     import type { Rescuers } from '$lib/models/rescuers';
@@ -35,8 +34,6 @@
 <div class="auto flex w-full justify-center">
     <div
         class="my-4 flex w-5/6 flex-row flex-wrap content-center rounded-xl bg-blue-neutral p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
-        in:fly|global={{ x: -100 }}
-        out:fly={{ x: 100 }}
     >
         <!-- Request ID -->
         <div
@@ -86,7 +83,7 @@
 
         <!-- Assign Button -->
         <div class="w-1/2 flex-initial content-center justify-center lg:ml-2 lg:basis-1/6">
-            {#if !(rescuer_id === null)}
+            {#if rescuer_id}
                 {#if ongoing}
                     <button
                         class="mx-2 w-5/6 flex-initial rounded-lg bg-[#144359] p-2 font-bold text-white lg:ml-[42px] lg:h-16 lg:w-[125px] lg:rounded-2xl lg:p-4"
