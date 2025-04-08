@@ -31,11 +31,11 @@
 
 <div class="auto flex w-full justify-center">
     <div
-        class="my-4 flex w-5/6 flex-row flex-wrap content-center rounded-xl bg-blue-neutral p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+        class="bg-blue-neutral my-4 flex w-5/6 flex-row flex-wrap content-center rounded-xl p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
     >
         <!-- Request ID -->
         <div
-            class="mb-4 w-1/2 flex-initial content-center text-lg font-bold lg:mb-0 lg:mr-10 lg:w-1/6 lg:text-2xl"
+            class="mb-4 w-1/2 flex-initial content-center text-lg font-bold lg:mr-10 lg:mb-0 lg:w-1/6 lg:text-2xl"
         >
             <p class="mt-1 h-8 text-center align-middle">{request_id}</p>
         </div>

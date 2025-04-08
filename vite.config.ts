@@ -1,15 +1,8 @@
 import { websocket } from '@ubermanu/sveltekit-websocket/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
-import autoprefixer from 'autoprefixer';
-import tailwind from 'tailwindcss';
-
 export default defineConfig({
-    plugins: [sveltekit(), websocket()],
-    css: {
-        postcss: {
-            plugins: [tailwind, autoprefixer],
-        },
-    },
+    plugins: [sveltekit(), tailwindcss(), websocket()],
 });
