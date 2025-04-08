@@ -9,7 +9,7 @@
     <div class="flex w-full justify-center">
         <a
             href="/login"
-            class="w-[180px] rounded-2xl bg-blue-neutral p-4 text-center font-medium text-white
+            class="bg-blue-neutral w-[180px] rounded-2xl p-4 text-center font-medium text-white
                                 hover:border-black hover:bg-[#a6dcf5] hover:text-black hover:duration-150
                                 active:bg-[#144359] active:font-semibold active:text-white active:drop-shadow-xl active:duration-150"
         >

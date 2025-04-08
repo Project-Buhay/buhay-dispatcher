@@ -55,7 +55,7 @@
 
 <div class="flex w-full content-center justify-center">
     <div
-        class="auto mb-4 mt-10 flex w-5/6 content-center rounded-xl bg-buhay-green p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
+        class="auto bg-buhay-green mt-10 mb-4 flex w-5/6 content-center rounded-xl p-4 text-white sm:mx-8 md:mx-16 lg:mx-36"
     >
         <div
             class="text-md w-1/2 flex-initial content-center text-center font-semibold md:text-lg lg:mr-10 lg:w-1/6 lg:text-2xl"

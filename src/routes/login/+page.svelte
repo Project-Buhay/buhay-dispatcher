@@ -28,9 +28,9 @@
                 <input
                     name="user"
                     type="text"
-                    class="flex w-[250px] rounded-xl selection:bg-blue-neutral selection:text-white focus:bg-blue-white
+                    class="selection:bg-blue-neutral focus:bg-blue-white flex w-[250px] rounded-xl selection:text-white
                                       {sign_in ? 'bg-light-gray' : ''}
-                                      {form?.message ? 'border-[2px] border-buhay-red' : ''} "
+                                      {form?.message ? 'border-buhay-red border-[2px]' : ''} "
                     placeholder="Username"
                     disabled={sign_in}
                     required
@@ -42,9 +42,9 @@
                     <input
                         name="password"
                         type={see_password ? 'text' : 'password'}
-                        class="w-[250px] rounded-xl focus:bg-blue-white
+                        class="focus:bg-blue-white w-[250px] rounded-xl
                                 {sign_in ? 'bg-light-gray' : ''}
-                                {form?.message ? 'border-[2px] border-buhay-red' : ''}"
+                                {form?.message ? 'border-buhay-red border-[2px]' : ''}"
                         placeholder="Password"
                         disabled={sign_in}
                         required
@@ -54,7 +54,7 @@
                             see_password = !see_password;
                             event.preventDefault();
                         }}
-                        class="absolute right-4 top-[12px]"
+                        class="absolute top-[12px] right-4"
                         disabled={sign_in}
                     >
                         {#if see_password}
@@ -68,7 +68,7 @@
 
             <div class="mb-5 flex w-full justify-center {form?.message ? 'visible' : 'invisible'}">
                 {#if form?.message}
-                    <p class="font-semibold text-buhay-red">{form?.message}</p>
+                    <p class="text-buhay-red font-semibold">{form?.message}</p>
                 {/if}
             </div>
 
@@ -78,7 +78,7 @@
                     class="rounded-2xl px-6 py-3 text-white
                            active:bg-[#144359] active:font-semibold active:text-white active:drop-shadow-xl active:duration-300
                            {!sign_in
-                        ? 'w-[100px] bg-blue-neutral font-medium hover:border-black hover:bg-[#a6dcf5] hover:text-black hover:duration-150'
+                        ? 'bg-blue-neutral w-[100px] font-medium hover:border-black hover:bg-[#a6dcf5] hover:text-black hover:duration-150'
                         : 'w-[200px bg-[#144359] font-semibold drop-shadow-xl'}"
                     disabled={sign_in}
                 >

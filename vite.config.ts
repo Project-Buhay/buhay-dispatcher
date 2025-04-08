@@ -1,6 +1,6 @@
 import { websocket } from '@ubermanu/sveltekit-websocket/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
