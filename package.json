@@ -18,9 +18,9 @@
         "lint:svelte": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
     },
     "dependencies": {
-        "@sveltejs/kit": "^2.20.4",
+        "@sveltejs/kit": "^2.20.5",
         "lucide-svelte": "^0.487.0",
-        "svelte": "^5.25.8",
+        "svelte": "^5.25.10",
         "valibot": "1.0.0"
     },
     "devDependencies": {
