@@ -2,7 +2,9 @@
 @import '$lib/fonts/Inter/font.css' layer(base);
 @import '$lib/buhay.css' layer(theme);
 
+@plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
 @config '../tailwind.config.ts';
 
 @layer base {

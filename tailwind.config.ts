@@ -1,5 +1,4 @@
 import { Config } from 'tailwindcss';
-import forms from '@tailwindcss/forms';
 
 export default {
     content: ['./src/**/*.{css,html,js,svelte,ts}'],
@@ -23,5 +22,4 @@ export default {
             },
         },
     },
-    plugins: [forms],
 } satisfies Config;
