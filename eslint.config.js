@@ -1,7 +1,8 @@
-import prettier from 'eslint-config-prettier';
+import globals from 'globals';
+import prettierConfig from 'eslint-config-prettier';
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
-import globals from 'globals';
+import svelteConfig from './svelte.config.js';
 import ts from 'typescript-eslint';
 
 export default ts.config(
@@ -18,12 +19,15 @@ export default ts.config(
             },
         },
     },
+
     {
-        files: ['**/*.svelte'],
+        files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
         languageOptions: {
             parserOptions: {
+                projectService: true,
                 extraFileExtensions: ['.svelte'],
                 parser: ts.parser,
+                svelteConfig,
             },
         },
         rules: {
@@ -31,9 +35,10 @@ export default ts.config(
             'svelte/require-each-key': 'off',
         },
     },
+
     {
         ignores: ['node_modules/**/*', '.svelte-kit/**/*', 'build/**/*'],
     },
 
-    prettier,
+    prettierConfig,
 );

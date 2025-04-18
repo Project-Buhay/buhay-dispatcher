@@ -1,0 +1,13 @@
+@theme {
+    --font-inter: inter, sans-serif;
+    --color-warm-white: #e0e1e0;
+    --color-blue-white: #d7e6ed;
+    --color-blue-neutral: #32718e;
+    --color-blue: #35adbb;
+    --color-black: #253242;
+    --color-gray: #a6a6a6;
+    --color-light-gray: #f0f0f0;
+    --color-dark-gray: #323232;
+    --color-buhay-red: #ad2121;
+    --color-buhay-green: #4ca682;
+}
