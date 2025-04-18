@@ -1,3 +1,24 @@
 @import 'tailwindcss';
+@import '$lib/fonts/Inter/font.css' layer(base);
+@import '$lib/buhay.css' layer(theme);
 
+@plugin '@tailwindcss/typography';
 @config '../tailwind.config.ts';
+
+@layer base {
+    :root {
+        --color-background: var(--color-white);
+        --color-foreground: var(--color-black);
+
+        --color-invert: var(--color-black);
+        --color-invert-foreground: var(--color-white);
+    }
+
+    :root[data-theme='dark'] {
+        --color-background: var(--color-black);
+        --color-foreground: var(--color-white);
+
+        --color-invert: var(--color-white);
+        --color-invert-foreground: var(--color-black);
+    }
+}
